@@ -1,0 +1,20 @@
+# Sử dụng Node.js image để phát triển frontend
+FROM node:18 as frontend
+
+# Đặt thư mục làm việc trong container cho frontend
+WORKDIR /app/frontend
+
+# Copy package.json và yarn.lock vào container
+COPY package.json yarn.lock ./
+
+# Cài đặt dependencies
+RUN yarn install
+
+# Copy toàn bộ mã nguồn frontend vào container
+COPY . /app/frontend
+
+# Mở cổng 5173 (hoặc cổng mà ứng dụng của bạn đang chạy)
+EXPOSE 5173
+
+# Chạy ứng dụng frontend với lệnh `yarn dev`
+CMD ["yarn", "dev"]
