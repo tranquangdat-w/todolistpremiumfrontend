@@ -32,7 +32,7 @@ export const Auth = () => {
       }}>
         <SvgIcon component={TrelloIcon} inheritViewBox sx={{ fontSize: '2.5rem', color: (theme) => theme.palette.text.primary }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: (theme) => theme.palette.text.primary }}>
-          Trello
+          ToDoListPremium
         </Typography>
       </Box>
       <Box sx={{

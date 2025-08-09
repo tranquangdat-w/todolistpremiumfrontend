@@ -19,9 +19,9 @@ export const RegisterForm = () => {
   const [reEnterPasswordVisible, setReEnterPasswordVisible] = useState(false)
 
   const submitRegister = data => {
-    const { email, password, username, confirmPassword } = data
+    const { email, password, username, confirmPassword, name } = data
     toast.promise(registerUserAPI(
-      { email, password, username, confirmPassword }
+      { email, password, username, confirmPassword, name }
     ), { pending: 'Registration is in progress...' }).then(user => {
       toast.success('Register account successfully!', {
         position: 'bottom-left',
@@ -41,6 +41,19 @@ export const RegisterForm = () => {
 
   return (
     <Box component="form" onSubmit={handleSubmit(submitRegister)} sx={{ mt: 1 }}>
+      <Typography sx={{ fontWeight: 'bold', mb: 0.2 }}>Name <RedAsterisk /></Typography>
+      <TextField
+        fullWidth
+        placeholder="Enter name"
+        variant="outlined"
+        margin="normal"
+        size="small"
+        error={!!errors['name']}
+        sx={{ mt: 0, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#DFE1E6' } } }}
+        {...register('name', { required: FIELDS_REQUIRED_MESSAGE })}
+      />
+      <FieldErrorAlert errors={errors} fieldName={'name'} />
+
       <Typography sx={{ fontWeight: 'bold', mb: 0.2 }}>Username <RedAsterisk /></Typography>
       <TextField
         fullWidth
@@ -161,10 +174,10 @@ export const RegisterForm = () => {
 
       <Box sx={{ mt: 2, pt: 1.5, borderTop: '1px solid #ccc', textAlign: 'center' }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1, color: (theme) => theme.palette.text.primary }}>
-          Trello helps teams move work forward.
+          ToDoListPremium helps teams move work forward.
         </Typography>
         <Typography variant="caption" sx={{ color: (theme) => theme.palette.text.secondary, px: 2 }}>
-          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.
+          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with ToDoListPremium.
         </Typography>
       </Box>
     </Box>

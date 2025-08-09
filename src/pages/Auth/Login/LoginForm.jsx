@@ -25,9 +25,9 @@ export const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   const submitLogin = (data) => {
-    const { username, password } = data
+    const { email, password } = data
     toast.promise(
-      dispatch(loginUserAPI({ username, password })),
+      dispatch(loginUserAPI({ email, password })),
       { pending: 'Logging in...' }
     ).then(res => {
       if (!res.error) navigate('/')
@@ -56,7 +56,7 @@ export const LoginForm = () => {
         size="small"
         error={!!errors['email']}
         sx={{ mt: 0, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#DFE1E6' } } }}
-        {...register('username', {
+        {...register('email', {
           required: FIELDS_REQUIRED_MESSAGE
         })}
       />
@@ -112,10 +112,10 @@ export const LoginForm = () => {
 
       <Box sx={{ mt: 2, pt: 1.5, borderTop: '1px solid #ccc', textAlign: 'center' }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1, color: (theme) => theme.palette.text.primary }}>
-          Trello helps teams move work forward.
+          ToDoListPremium helps teams move work forward.
         </Typography>
         <Typography variant="caption" sx={{ color: (theme) => theme.palette.text.secondary, px: 2 }}>
-          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.
+          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with ToDoListPremium.
         </Typography>
       </Box>
     </Box>

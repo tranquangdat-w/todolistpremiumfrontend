@@ -16,3 +16,7 @@ export const refreshTokenAPI = async () => {
   return response.data
 }
 
+export const testAPI = async () => {
+  const response = await authorizedAxiosInstance.get('/users/hello')
+  return response.data
+}
