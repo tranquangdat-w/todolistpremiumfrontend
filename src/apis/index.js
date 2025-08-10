@@ -20,3 +20,13 @@ export const testAPI = async () => {
   const response = await authorizedAxiosInstance.get('/users/hello')
   return response.data
 }
+
+export const requestPasswordResetAPI = async (data) => {
+  const response = await authorizedAxiosInstance.get('/reset')
+  return response.data
+}
+
+export const resetPasswordAPI = async (data) => {
+  const response = await authorizedAxiosInstance.get('/reset')
+  return response.data
+}

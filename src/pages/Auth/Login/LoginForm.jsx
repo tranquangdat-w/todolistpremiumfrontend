@@ -20,6 +20,7 @@ export const LoginForm = () => {
   const registeredEmail = searchParams.get('registeredEmail')
 
   const verifiedEmail = searchParams.get('verifiedEmail')
+  const preFilled = searchParams.get('pre')
 
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -54,6 +55,7 @@ export const LoginForm = () => {
         variant="outlined"
         margin="normal"
         size="small"
+        defaultValue={preFilled ? preFilled : ''}
         error={!!errors['email']}
         sx={{ mt: 0, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#DFE1E6' } } }}
         {...register('email', {
@@ -101,7 +103,7 @@ export const LoginForm = () => {
       </Button>
 
       <Box sx={{ mt: 1.5, textAlign: 'center' }}>
-        <MuiLink component={Link} to="#" variant="body2">
+        <MuiLink component={Link} to="/reset" variant="body2">
           Can't log in?
         </MuiLink>
         <Typography variant="body2" component="span" sx={{ mx: 1 }}>•</Typography>
