@@ -6,6 +6,8 @@ import { selectCurrentUser } from '~/redux/user/userSlice'
 import { useSelector } from 'react-redux'
 import { ProtectedRoute } from './pages/Auth/ProtectedRoute'
 import Home from './pages/Home/Home'
+import Profile from './pages/Profile/Profile'
+import Folder from './pages/Folder/Folder'
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser)
@@ -16,9 +18,13 @@ const App = () => {
       <Route path='/' element={<Navigate to='/home' replace={true} />} />
 
       {/* Protected Row */}
-      <Route element={<ProtectedRoute user={currentUser} />}>
+      {/* <Route element={<ProtectedRoute user={currentUser} />}>
         <Route path='/home' element={<Home />} />
-      </Route>
+      </Route> */}
+
+      <Route path='/home' element={<Home />} />
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/folder' element={<Folder />} />
 
       {/*Auth*/}
       <Route path='/login' element={<Auth />} />
