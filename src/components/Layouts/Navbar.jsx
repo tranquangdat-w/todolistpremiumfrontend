@@ -1,7 +1,13 @@
 import { Bell, User, Plus } from 'lucide-react';
 import logo from '../../assets/trello.svg';
-
+import { useState } from 'react';
+import NotificationBox from '../NotificationBox/NotificationBox.jsx';
 export default function Navbar() {
+    const [showNotification, setShowNotification] = useState(false);
+      const toggleNotification = () => {
+        setShowNotification(!showNotification);
+      };
+
     return (
         <nav className="bg-white shadow z-10 px-8 py-2 fixed left-0 right-0 top-0 flex items-center justify-between">
             {/* Logo */}
@@ -28,7 +34,17 @@ export default function Navbar() {
 
             </div>
             <div className="flex items-center gap-3">
-                <Bell className="w-6 h-6 text-gray-600 cursor-pointer" />
+                <div className="relative inline-block">
+                    <Bell
+                        className="w-6 h-6 text-gray-600 cursor-pointer"
+                        onClick={toggleNotification}
+                    />
+                    {showNotification && (
+                        <div className="absolute mt-2 right-0">
+                            <NotificationBox onClose={() => setShowNotification(false)} />
+                        </div>
+                    )}
+                </div>
                 <div className="bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">
                     <User size={18} />
                 </div>

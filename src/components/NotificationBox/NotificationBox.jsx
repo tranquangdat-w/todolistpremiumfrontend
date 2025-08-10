@@ -76,9 +76,9 @@ const NotificationBox = ({ onClose }) => {
   return (
     <div
       style={{
-        position: 'fixed',
-        top: 30,
-        right: 30,
+        // position: 'fixed',
+        // top: 30,
+        // right: 30,
         background: '#e3f2fd',
         borderRadius: 20,
         boxShadow: '0 2px 24px rgba(0,0,0,0.10)',
