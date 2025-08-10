@@ -5,10 +5,12 @@ import { RegisterForm } from './Register/RegisterForm'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
+import { PasswordReset } from '~/pages/Auth/PasswordReset/PasswordReset.jsx'
 
 export const Auth = () => {
   const location = useLocation()
   const isLogin = location.pathname === '/login'
+  const isReset = location.pathname === '/reset'
 
   const user = useSelector(selectCurrentUser)
 
@@ -44,9 +46,9 @@ export const Auth = () => {
         p: '20px 30px'
       }}>
         <Typography variant="h6" align="center" sx={{ color: (theme) => theme.palette.text.primary, fontWeight: 'bold', mb: 2 }}>
-          {isLogin ? 'Log in to continue' : 'Sign up for your account'}
+          {isReset ? 'Forgot your password?' : isLogin ? 'Log in to continue' : 'Sign up for your account'}
         </Typography>
-        {isLogin ? <LoginForm /> : <RegisterForm />}
+        {isReset ? <PasswordReset/> : isLogin ? <LoginForm /> : <RegisterForm />}
       </Box>
     </Box>
   )

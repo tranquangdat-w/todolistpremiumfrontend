@@ -6,6 +6,7 @@ import { selectCurrentUser } from '~/redux/user/userSlice'
 import { useSelector } from 'react-redux'
 import { ProtectedRoute } from './pages/Auth/ProtectedRoute'
 import Home from './pages/Home/Home'
+import { PasswordReset } from '~/pages/Auth/PasswordReset/PasswordReset.jsx'
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser)
@@ -22,7 +23,8 @@ const App = () => {
 
       {/*Auth*/}
       <Route path='/login' element={<Auth />} />
-      <Route path='/register' element={<Auth />} />
+      <Route path='/reset' element={<Auth/>}/>
+      <Route path='/reset' element={<PasswordReset/>}/>
       <Route path='/users/verification' element={<AccountVerification />} />
 
       {/* 404 Not found */}
