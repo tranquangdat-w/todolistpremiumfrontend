@@ -14,12 +14,23 @@ const RedAsterisk = () => <Typography component="span" sx={{ color: 'red' }}>*</
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors }, watch } = useForm()
+  const { register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    watch } = useForm()
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [reEnterPasswordVisible, setReEnterPasswordVisible] = useState(false)
 
   const submitRegister = data => {
     const { email, password, username, confirmPassword, name } = data
+    if (password !== confirmPassword) {
+      setError('confirmPassword', {
+        type: 'manual',
+        message: 'Passwords do not match'
+      })
+      return
+    }
     toast.promise(registerUserAPI(
       { email, password, username, confirmPassword, name }
     ), { pending: 'Registration is in progress...' }).then(user => {

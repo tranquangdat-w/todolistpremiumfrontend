@@ -29,6 +29,7 @@ const App = () => {
       {/*Auth*/}
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
+      <Route path='/reset' element={<Auth/>}/>
       <Route path='/users/verification' element={<AccountVerification />} />
 
       {/* 404 Not found */}
