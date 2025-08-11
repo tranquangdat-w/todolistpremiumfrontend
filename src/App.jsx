@@ -8,6 +8,8 @@ import { ProtectedRoute } from './pages/Auth/ProtectedRoute'
 import Home from './pages/Home/Home'
 import Profile from './pages/Profile/Profile'
 import Folder from './pages/Folder/Folder'
+import { PasswordReset } from '~/pages/Auth/PasswordReset/PasswordReset.jsx'
+import Board from './pages/Board/Board'
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser)
@@ -15,7 +17,7 @@ const App = () => {
   return (
     <Routes>
       {/* Redirect Route */}
-      <Route path='/' element={<Navigate to='/home' replace={true} />} />
+      {/* <Route path='/' element={<Navigate to='/' replace={true} />} /> */}
 
       {/* Protected Row */}
       {/* <Route element={<ProtectedRoute user={currentUser} />}>
@@ -25,11 +27,17 @@ const App = () => {
       <Route path='/home' element={<Home />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/folder' element={<Folder />} />
+      <Route element={<ProtectedRoute user={currentUser} />}>
+        <Route path='/' element={<Home />} />
+        <Route path='/boards/:boardId' element={<Board />} />
+      </Route>
 
       {/*Auth*/}
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/reset' element={<Auth/>}/>
+      <Route path='/reset' element={<Auth />} />
+      <Route path='/reset' element={<PasswordReset />} />
       <Route path='/users/verification' element={<AccountVerification />} />
 
       {/* 404 Not found */}

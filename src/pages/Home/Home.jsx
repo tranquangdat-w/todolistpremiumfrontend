@@ -1,69 +1,46 @@
-import { Card, CardContent, Typography, Button, IconButton, Checkbox } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { testAPI } from '~/apis'
-import { logoutUserAPI } from '~/redux/user/userSlice'
+import { useMemo, useState } from 'react'
+import { Pagination } from '@mui/material'
+import BoardPreviewCard from './components/BoardPreviewCard'
 
-const Home = () => {
-  const dispatch = useDispatch()
+/* Dữ liệu mẫu */
+const SAMPLE_BOARDS = Array.from({ length: 31 }).map((_, i) => ({
+  id: `${i + 1}`,
+  title: `Board ${i + 1}`,
+  description: `Mô tả ngắn cho board Mô tả ngắn cho board Mô tả ngắn cho board Mô tả ngắn cho board ${i + 1}`,
+  count: Math.floor(Math.random() * 20),
+}))
 
-  const handleLogout = () => {
-    dispatch(logoutUserAPI())
-  }
+export default function Home() {
+  const [page, setPage] = useState(1)
+  const pageSize = 8
 
-  const handleHello = () => {
-    testAPI().then((res) => console.log(res))
-  }
+  const totalPages = Math.ceil(SAMPLE_BOARDS.length / pageSize)
 
-  const [lists, setLists] = useState([
-    { id: 1, title: 'Cần làm', cards: [] },
-    { id: 2, title: 'Đang làm', cards: [{ id: 1, title: 'Tiêu đề' }, { id: 2, title: 'Tiêu đề' }] },
-    { id: 3, title: 'Đã xong', cards: [] },
-  ]);
+  const boardsOnPage = useMemo(() => {
+    const start = (page - 1) * pageSize
+    return SAMPLE_BOARDS.slice(start, start + pageSize)
+  }, [page])
 
   return (
-    <div className="px-8  bg-[#0079bf] min-h-screen rounded-[40px] relative">
-      <h1 className="text-white text-2xl font-bold bg-blue-800 py-4 px-8 absolute top-0 left-0 right-0 w-full">Mock project</h1>
-      <div className="flex gap-4 overflow-x-auto py-20">
-        {lists.map((list) => (
-          <div
-            key={list.id}
-            className="bg-gray-200 rounded-2xl h-fit w-64 flex-shrink-0 p-2"
-          >
-            <Typography variant="subtitle1" className="font-bold mb-2">{list.title}</Typography>
-            {list.cards.map((card) => (
-              <Card key={card.id} className="mt-2 !rounded-2xl">
-                <CardContent className="flex items-center justify-between !p-2">
-                  <div className="flex items-center gap-2">
-                    <Checkbox size="small" />
-                    <Typography>{card.title}</Typography>
-                  </div>
-                  <IconButton size="small">
-                    <EditIcon fontSize="small" />
-                  </IconButton>
-                </CardContent>
-              </Card>
-            ))}
-            <Button
-              size="small"
-              fullWidth
-              className="mt-1 normal-case text-black"
-            >
-              + Thêm thẻ
-            </Button>
-          </div>
-        ))}
+    <div className="min-h-screen bg-white">
+      <div className="max-w-5xl mx-auto p-4">
+        <h2 className="text-4xl font-semibold mb-3">Boards</h2>
 
-        <Button
-          variant="contained"
-          className="!bg-slate-200 hover:bg-blue-100 normal-case h-fit !text-[#0079bf] !rounded-xl flex-shrink-0"
-        >
-          + Thêm danh sách khác
-        </Button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {boardsOnPage.map((b) => (
+            <BoardPreviewCard key={b.id} board={b} />
+          ))}
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={(_, v) => setPage(v)}
+            color="primary"
+          />
+        </div>
       </div>
     </div>
-  );
+  )
 }
-
-export default Home
