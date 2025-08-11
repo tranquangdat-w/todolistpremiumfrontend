@@ -1,10 +1,12 @@
-import { Card, CardContent, Typography, Button, IconButton, Checkbox } from '@mui/material';
+import { Card, CardContent, Typography, Button, IconButton, Checkbox, Select, MenuItem } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { testAPI } from '~/apis'
 import { logoutUserAPI } from '~/redux/user/userSlice'
-
+import { Settings } from "@mui/icons-material";
+import { View } from 'lucide-react';
+import ViewSelect from '~/components/ViewSelection/ViewSelect';
 const Home = () => {
   const dispatch = useDispatch()
 
@@ -16,6 +18,9 @@ const Home = () => {
     testAPI().then((res) => console.log(res))
   }
 
+  const [selectedOption, setSelectedOption] = useState('all');
+  const handleSelectChange = (e) => setSelectedOption(e.target.value);
+  
   // tạo thông báo ban đầu cho user
   // const (showModal, setShowModal) = useState(true);
   // const handleCloseModal = () => {
@@ -31,7 +36,12 @@ const Home = () => {
 
   return (
     <div className="px-8  bg-[#0079bf] min-h-screen rounded-[40px] relative">
-      <h1 className="text-white text-2xl font-bold bg-blue-800 py-4 px-8 absolute top-0 left-0 right-0 w-full">Mock project</h1>
+      <div className="text-white text-2xl font-bold bg-blue-800 py-4 px-8 absolute top-0 left-0 right-0 w-full flex items-center justify-between">
+        <h1>Mock Project</h1>
+        <ViewSelect />
+      </div>
+      <h1>Mock project</h1>
+
       <div className="flex gap-4 overflow-x-auto py-20">
         {lists.map((list) => (
           <div
