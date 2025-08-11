@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAPI, selectCurrentUser } from '~/redux/user/userSlice';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ChangePasswordDialog from './ChangePasswordDialog';
-import { updateAvatarAPI } from '~/apis/index'; 
+import { updateAvatarAPI } from '~/apis/index';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser); // Lấy dữ liệu người dùng từ Redux
   const fileInputRef = useRef(null);
-  const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatar || 'https://via.placeholder.com/150');
+  const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatar || 'https://via.placeholder.com/150')
 
   // State để quản lý dialog
   const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
@@ -41,7 +41,7 @@ const Profile = () => {
         console.log('Update avatar thành công:', data);
 
         if (data?.user?.avatar) {
-          setAvatarUrl(data.user.avatar);   
+          setAvatarUrl(data.user.avatar);
         }
       } catch (error) {
         console.error('Lỗi update avatar:', error);

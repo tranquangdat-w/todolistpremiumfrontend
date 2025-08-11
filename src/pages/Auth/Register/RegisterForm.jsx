@@ -46,7 +46,7 @@ export const RegisterForm = () => {
         transition: Bounce
       })
 
-      navigate(`/login?registeredEmail=${user.email}`)
+      navigate(`/login?registeredEmail=${email}`)
     })
   }
 

@@ -24,7 +24,6 @@ const App = () => {
         <Route path='/home' element={<Home />} />
       </Route> */}
 
-      <Route path='/home' element={<Home />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/folder' element={<Folder />} />
       <Route element={<ProtectedRoute user={currentUser} />}>
@@ -36,9 +35,7 @@ const App = () => {
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/reset' element={<Auth/>}/>
-      <Route path='/reset' element={<Auth />} />
-      <Route path='/reset' element={<PasswordReset />} />
-      <Route path='/users/verification' element={<AccountVerification />} />
+      <Route path='/users/verfication' element={<AccountVerification />} />
 
       {/* 404 Not found */}
       <Route path='*' element={<NotFound />} />
