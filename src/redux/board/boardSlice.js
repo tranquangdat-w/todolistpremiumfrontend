@@ -66,7 +66,7 @@ export const boardSlice = createSlice({
             const newBoard = action.meta.arg.data
             console.log(state.boards);
 
-            state.boards = [newBoard, ...state.boards]
+            state.boards = [...state.boards, newBoard]
         })
         builder.addCase(getBoardDetailAPI.fulfilled, (state, action) => {
             state.board = action.payload
