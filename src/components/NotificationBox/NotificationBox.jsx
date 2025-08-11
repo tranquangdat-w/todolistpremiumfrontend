@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Switch } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Badge, IconButton } from '@mui/material';
 const notifications = [
   {
     title: 'Complete the UI design of Landing Page for FoodVentures.',
@@ -84,7 +83,7 @@ const NotificationBox = ({ onClose }) => {
         boxShadow: '0 2px 24px rgba(0,0,0,0.10)',
         width: 420,
         maxWidth: '95vw',
-        zIndex: 10000,
+        zIndex: 100,
         overflow: 'hidden',
         fontFamily: 'inherit',
         border: '1px solid #bbdefb'
