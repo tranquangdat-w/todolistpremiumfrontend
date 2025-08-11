@@ -63,7 +63,7 @@ export default function BoardPreviewCard({ board }) {
         </Card>
       </Link>
 
-      <IconButton className='absolute right-0 top-[50%] -translate-y-[50%] z-10' size="small" onClick={handleMenuOpen}>
+      <IconButton className='absolute right-0 top-[50%] -translate-y-[50%] z-2' size="small" onClick={handleMenuOpen}>
         <MoreVertIcon />
       </IconButton>
 
