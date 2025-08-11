@@ -1,30 +1,13 @@
 import { MenuItem, Select } from "@mui/material";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import TableChartIcon from "@mui/icons-material/TableChart";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import TimelineIcon from "@mui/icons-material/Timeline";
-import MapIcon from "@mui/icons-material/Map";
-import { useState } from "react";
 
-export default function ViewSelect() {
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const options = [
-    { value: "board", label: "Board", icon: <ViewModuleIcon /> },
-    { value: "table", label: "Table", icon: <TableChartIcon /> },
-    { value: "dashboard", label: "Dashboard", icon: <DashboardIcon /> },
-  ];
-
+export default function ViewSelect({ options, selectedOption, setSelectedOption }) {
   return (
     <Select
       value={selectedOption}
       onChange={(e) => setSelectedOption(e.target.value)}
       displayEmpty
       renderValue={(selected) => {
-        // If nothing is selected, show default icon
-        if (!selected) return <ViewModuleIcon />;
-        // Show only the icon of the selected item
+        if (!selected) return options[0]?.icon || null; // Default icon
         const option = options.find((opt) => opt.value === selected);
         return option ? option.icon : null;
       }}
