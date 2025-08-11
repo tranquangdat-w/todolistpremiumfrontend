@@ -4,18 +4,21 @@ import { useState } from 'react';
 import NotificationBox from '../NotificationBox/NotificationBox.jsx';
 import GraphModals from '../TaskModals/GraphModals';
 import ListModals from '../TaskModals/ListModals';
+import FormCreateBoard from '../Form/FormCreateBoard';
 export default function Navbar() {
     const [showNotification, setShowNotification] = useState(false);
-      const toggleNotification = () => {
+    const [open, setOpen] = useState(false);
+    const toggleNotification = () => {
         setShowNotification(!showNotification);
-      };
+    };
 
     const [showModal, setShowModal] = useState(true);
     const handleCloseModal = () => {
-      setShowModal(false);
+        setShowModal(false);
     };
 
-    
+    const handleOpen = () => setOpen(true);
+
     return (
         <>
             {showModal && (
@@ -41,9 +44,17 @@ export default function Navbar() {
                     </div>
 
                     {/* Actions */}
-                    <button className="bg-blue-600 w-[20%] text-white px-4 py-1 rounded-lg flex justify-center items-center gap-1 hover:bg-blue-700">
+                    <button
+                        onClick={handleOpen}
+                        className="bg-blue-600 w-[20%] text-white px-4 py-1 rounded-lg flex justify-center items-center gap-1 hover:bg-blue-700">
                         <Plus size={16} /> Tạo mới
                     </button>
+
+                    {
+                        open && (
+                            <FormCreateBoard open={open} setOpen={setOpen} />
+                        )
+                    }
 
                 </div>
                 <div className="flex items-center gap-3">

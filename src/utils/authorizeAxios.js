@@ -10,7 +10,11 @@ let axiosReduxStore
 export const injectStore = (mainStore) => { axiosReduxStore = mainStore }
 
 let authorizedAxiosInstance = axios.create({
-  baseURL: `${API_ROOT}`
+  baseURL: `${API_ROOT}`,
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  withCredentials: true
 })
 
 // Thoi gian doi req cua server

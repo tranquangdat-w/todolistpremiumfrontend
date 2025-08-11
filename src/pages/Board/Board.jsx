@@ -1,21 +1,21 @@
-import { Card, CardContent, Typography, Button, IconButton, Checkbox } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Card, CardContent, Typography, Button, IconButton, Checkbox } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { testAPI } from '~/apis'
 import { logoutUserAPI } from '~/redux/user/userSlice'
-import TaskDetail from '~/components/Folder/TaskDetail';
+import TaskDetail from '~/components/Folder/TaskDetail'
 
-import ViewSelect from '~/components/ViewSelection/ViewSelect';
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import TableChartIcon from "@mui/icons-material/TableChart";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { set } from 'lodash';
-import TableView from './TableView';
-import DashboardView from './DashboardView';
+import ViewSelect from '~/components/ViewSelection/ViewSelect'
+import ViewModuleIcon from '@mui/icons-material/ViewModule'
+import TableChartIcon from '@mui/icons-material/TableChart'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import { set } from 'lodash'
+import TableView from './TableView'
+import DashboardView from './DashboardView'
 const Board = () => {
     const dispatch = useDispatch()
-    const [openEdit, setOpenEdit] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false)
 
     const handleLogout = () => {
         dispatch(logoutUserAPI())
@@ -29,14 +29,14 @@ const Board = () => {
         { id: 1, title: 'Cần làm', cards: [] },
         { id: 2, title: 'Đang làm', cards: [{ id: 1, title: 'Tiêu đề' }, { id: 2, title: 'Tiêu đề' }] },
         { id: 3, title: 'Đã xong', cards: [] },
-    ]);
+    ])
     
-    const [selectedView, setSelectedView] = useState("board");
+    const [selectedView, setSelectedView] = useState('board')
     const views = [
-        { value: "board", label: "Board", icon: <ViewModuleIcon /> },
-        { value: "table", label: "Table", icon: <TableChartIcon /> },
-        { value: "dashboard", label: "Dashboard", icon: <DashboardIcon /> },
-    ];
+        { value: 'board', label: 'Board', icon: <ViewModuleIcon /> },
+        { value: 'table', label: 'Table', icon: <TableChartIcon /> },
+        { value: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
+    ]
 
 
     return (
@@ -53,7 +53,7 @@ const Board = () => {
             </div>
 
             <div className="flex gap-4 overflow-x-auto py-20">
-                {selectedView === "board" && (
+                {selectedView === 'board' && (
                     <>
                     {lists.map((list) => (
                     <div
@@ -99,11 +99,11 @@ const Board = () => {
                     </>
                 )}
 
-                {selectedView === "table" && <TableView />}
-                {selectedView === "dashboard" && <DashboardView />}
+                {selectedView === 'table' && <TableView />}
+                {selectedView === 'dashboard' && <DashboardView />}
             </div>
         </div>
-    );
+    )
 }
 
-export default Board;
+export default Board

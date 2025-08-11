@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Pagination } from '@mui/material'
 import BoardPreviewCard from './components/BoardPreviewCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBoardsByUserIdAPI } from '~/redux/board/boardSlice'
 
 /* Dữ liệu mẫu */
 const SAMPLE_BOARDS = Array.from({ length: 31 }).map((_, i) => ({
@@ -13,12 +15,18 @@ const SAMPLE_BOARDS = Array.from({ length: 31 }).map((_, i) => ({
 export default function Home() {
   const [page, setPage] = useState(1)
   const pageSize = 8
+  const dispatch = useDispatch()
+  const board = useSelector((store) => store.board)
 
-  const totalPages = Math.ceil(SAMPLE_BOARDS.length / pageSize)
+  const totalPages = 10
 
   const boardsOnPage = useMemo(() => {
-    const start = (page - 1) * pageSize
-    return SAMPLE_BOARDS.slice(start, start + pageSize)
+        
+    return board?.boards
+  }, [page, board?.boards])
+
+  useEffect(() => {
+    dispatch(getBoardsByUserIdAPI({ page: page-1, size: pageSize }))
   }, [page])
 
   return (
@@ -27,7 +35,7 @@ export default function Home() {
         <h2 className="text-4xl font-semibold mb-3">Boards</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {boardsOnPage.map((b) => (
+          {boardsOnPage?.length > 0 && boardsOnPage.map((b) => (
             <BoardPreviewCard key={b.id} board={b} />
           ))}
         </div>

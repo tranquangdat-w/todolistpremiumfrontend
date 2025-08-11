@@ -1,4 +1,5 @@
 import { userReducer } from './user/userSlice'
+import { boardReducer } from './board/boardSlice'
 
 import { combineReducers } from 'redux'
 import storage from 'redux-persist/lib/storage'
@@ -23,7 +24,8 @@ const rootPersistConfig = {
 }
 
 const reducers = combineReducers({
-  user: userReducer
+  user: userReducer,
+  board: boardReducer
 })
 
 

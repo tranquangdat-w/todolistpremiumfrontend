@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Divider } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom'
-import { Divide } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { deleteBoardAPI, updateBoardAPI } from '~/redux/board/boardSlice';
 
 export default function BoardPreviewCard({ board }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [title, setTitle] = useState(board.title);
   const [description, setDescription] = useState(board.description);
+  const dispatch = useDispatch();
 
   // Mở menu
   const handleMenuOpen = (event) => {
@@ -20,6 +22,11 @@ export default function BoardPreviewCard({ board }) {
     setAnchorEl(null);
   };
 
+  const handleDelete = (boardId) => {
+    dispatch(deleteBoardAPI({ boardId }));
+    handleMenuClose();
+  }
+
   // Mở popup edit
   const handleEditClick = () => {
     setOpenEdit(true);
@@ -28,6 +35,7 @@ export default function BoardPreviewCard({ board }) {
 
   // Lưu chỉnh sửa
   const handleSave = () => {
+    dispatch(updateBoardAPI({ data: { title, description }, boardId: board.id }));
     setOpenEdit(false);
   };
   return (
@@ -75,7 +83,7 @@ export default function BoardPreviewCard({ board }) {
         onClose={handleMenuClose}
       >
         <MenuItem onClick={handleEditClick}>Sửa tiêu đề & mô tả</MenuItem>
-        <MenuItem onClick={() => { handleMenuClose(); }}>
+        <MenuItem onClick={() => handleDelete(board.id)}>
           Xóa board
         </MenuItem>
       </Menu>
