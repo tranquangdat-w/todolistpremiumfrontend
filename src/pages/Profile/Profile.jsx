@@ -4,10 +4,10 @@ import {
   IconButton, Tooltip
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUserAPI, selectCurrentUser } from '~/redux/user/userSlice';
+import { logoutUserAPI, selectCurrentUser, updateAvatarAPI } from '~/redux/user/userSlice';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ChangePasswordDialog from './ChangePasswordDialog';
-import { updateAvatarAPI } from '~/apis/index'; 
+
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,20 +35,10 @@ const Profile = () => {
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setAvatarUrl(previewUrl);
-
-      try {
-        const data = await updateAvatarAPI(currentUser?.id || currentUser?._id, file);
-        console.log('Update avatar thành công:', data);
-
-        if (data?.user?.avatar) {
-          setAvatarUrl(data.user.avatar);   
-        }
-      } catch (error) {
-        console.error('Lỗi update avatar:', error);
-      }
+      dispatch(updateAvatarAPI(file)); // Gọi API cập nhật avatar
     }
   };
-
+  
   return (
     <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4, p: 2 }}>
       {/* Avatar + background */}

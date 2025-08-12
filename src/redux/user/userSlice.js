@@ -32,6 +32,21 @@ export const updateUserAPI = createAsyncThunk(
     return response.data
   }
 )
+
+export const updateAvatarAPI = createAsyncThunk(
+  'users/updateAvatarAPI',
+  async (file) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    const response = await authorizedAxiosInstance.put(
+      '/users/avatar',
+      formData
+    );
+
+    return response.data;
+  })
+
 // Khoi tao slice trong kho luu tru redux
 export const userSlice = createSlice({
   name: 'user',
@@ -50,6 +65,11 @@ export const userSlice = createSlice({
       state.currentUser = null
     }),
     builder.addCase(updateUserAPI.fulfilled, (state, action) => {
+      let user = action.payload
+
+      state.currentUser = user
+    })
+    builder.addCase(updateAvatarAPI.fulfilled, (state, action) => {
       let user = action.payload
 
       state.currentUser = user

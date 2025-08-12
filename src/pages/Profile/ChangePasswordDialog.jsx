@@ -33,7 +33,7 @@ const ChangePasswordDialog = ({ open, onClose, userId }) => {
     }
 
     try {
-      const response = await changePasswordAPI(userId, { oldPassword, newPassword, cofirmPassword });
+      const response = await changePasswordAPI({ oldPassword, newPassword, cofirmPassword });
       toast.success(response?.message || 'Đổi mật khẩu thành công!');
       reset();
       onClose();
